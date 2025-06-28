@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Amalog – Real-Time Escalation Log</title>
   <style>
     body {
@@ -22,6 +22,7 @@
       text-shadow: 2px 2px 5px #000;
       margin-bottom: 30px;
       font-size: 28px;
+      font-weight: bold;
     }
 
     form {
@@ -69,16 +70,26 @@
 
     .output {
       max-width: 600px;
-      margin: 20px auto;
+      margin: 30px auto 0 auto;
       background: rgba(255, 255, 255, 0.95);
       padding: 20px;
       border-radius: 12px;
       border: 1px solid #ccc;
     }
 
+    .output h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #003366;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+
     .output p {
-      margin: 8px 0;
+      margin: 6px 0;
       font-size: 14px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -120,7 +131,7 @@
   </form>
 
   <div class="output" id="output" style="display:none;">
-    <h2>Escalation Summary</h2>
+    <h2>Real-Time Escalation Report</h2>
     <p><strong>Remarks:</strong> <span id="outRemarks"></span></p>
     <p><strong>FMC GPS Flowing:</strong> <span id="outFmc"></span></p>
     <p><strong>Current Status:</strong> <span id="outStatus"></span></p>
@@ -156,8 +167,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
