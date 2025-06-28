@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amalog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amalog – Real-Time Escalation Log</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-image: url("https://clhexpress.com/upload/2022/08/04/16595757018969kzwtj.jpg");
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://clhexpress.com/upload/2022/08/04/16595757018969kzwtj.jpg');
       background-size: cover;
-      background-position: center;
       background-repeat: no-repeat;
+      background-position: center;
       padding: 20px;
-      color: #000;
+      margin: 0;
+      color: #222;
     }
-    h1, h2 {
+
+    h1 {
       text-align: center;
       color: #fff;
-      text-shadow: 1px 1px 2px #000;
+      text-shadow: 2px 2px 5px #000;
+      margin-bottom: 30px;
+      font-size: 28px;
     }
+
     form {
       max-width: 600px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.9);
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     }
+
     label {
       display: block;
       margin: 15px 0 5px;
-      font-weight: bold;
+      font-weight: 600;
     }
+
     input[type="text"],
     textarea {
       width: 100%;
@@ -39,90 +46,108 @@
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+      font-size: 14px;
     }
+
     button {
       display: block;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background-color: #0052cc;
       color: white;
       border: none;
       border-radius: 6px;
       margin-top: 20px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #003d99;
     }
+
     .output {
       max-width: 600px;
       margin: 20px auto;
-      background: rgba(230, 240, 255, 0.95);
+      background: rgba(255, 255, 255, 0.95);
       padding: 20px;
       border-radius: 12px;
       border: 1px solid #ccc;
     }
+
     .output p {
       margin: 8px 0;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <h1>Amalog – Real-Time Escalation Log</h1>
+
   <form id="amalogForm">
     <label for="remarks">Remarks:</label>
     <textarea id="remarks" name="remarks" rows="3"></textarea>
 
-    <label for="fmc">FMC/GPS:</label>
-    <input type="text" id="fmc" name="fmc">
+    <label for="fmc">FMC GPS Flowing:</label>
+    <input type="text" id="fmc" name="fmc" />
+
+    <label for="status">Current Status:</label>
+    <input type="text" id="status" name="status" />
 
     <label for="location">Location of Incident:</label>
-    <input type="text" id="location" name="location">
+    <input type="text" id="location" name="location" />
 
     <label for="currentLocation">Current Location:</label>
-    <input type="text" id="currentLocation" name="currentLocation">
+    <input type="text" id="currentLocation" name="currentLocation" />
 
-    <label for="time">Time of Incident:</label>
-    <input type="text" id="time" name="time">
+    <label for="delay">Delay Hours:</label>
+    <input type="text" id="delay" name="delay" />
 
     <label for="source">Source of Information:</label>
-    <input type="text" id="source" name="source">
+    <input type="text" id="source" name="source" />
+
+    <label for="time">Time of Incident:</label>
+    <input type="text" id="time" name="time" />
 
     <label for="distance">Distance to Cover:</label>
-    <input type="text" id="distance" name="distance">
+    <input type="text" id="distance" name="distance" />
 
-    <label for="escalated">Escalated:</label>
-    <input type="text" id="escalated" name="escalated">
+    <label for="escalated">Escalated to Regional Team:</label>
+    <input type="text" id="escalated" name="escalated" />
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Report</button>
   </form>
 
   <div class="output" id="output" style="display:none;">
-    <h2>📋 Submitted Report</h2>
-    <p><strong>📝 Remarks:</strong> <span id="outRemarks"></span></p>
-    <p><strong>📡 FMC/GPS:</strong> <span id="outFmc"></span></p>
-    <p><strong>📍 Location of Incident:</strong> <span id="outLocation"></span></p>
-    <p><strong>📍 Current Location:</strong> <span id="outCurrentLocation"></span></p>
-    <p><strong>🕒 Time of Incident:</strong> <span id="outTime"></span></p>
-    <p><strong>📢 Source of Info:</strong> <span id="outSource"></span></p>
-    <p><strong>📏 Distance to Cover:</strong> <span id="outDistance"></span></p>
-    <p><strong>⚠️ Escalated:</strong> <span id="outEscalated"></span></p>
+    <h2>Escalation Summary</h2>
+    <p><strong>Remarks:</strong> <span id="outRemarks"></span></p>
+    <p><strong>FMC GPS Flowing:</strong> <span id="outFmc"></span></p>
+    <p><strong>Current Status:</strong> <span id="outStatus"></span></p>
+    <p><strong>Location of Incident:</strong> <span id="outLocation"></span></p>
+    <p><strong>Current Location:</strong> <span id="outCurrentLocation"></span></p>
+    <p><strong>Delay Hours:</strong> <span id="outDelay"></span></p>
+    <p><strong>Source of Information:</strong> <span id="outSource"></span></p>
+    <p><strong>Time of Incident:</strong> <span id="outTime"></span></p>
+    <p><strong>Distance to Cover:</strong> <span id="outDistance"></span></p>
+    <p><strong>Escalated to Regional Team:</strong> <span id="outEscalated"></span></p>
   </div>
 
   <script>
     const form = document.getElementById('amalogForm');
     const output = document.getElementById('output');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       document.getElementById('outRemarks').innerText = document.getElementById('remarks').value;
       document.getElementById('outFmc').innerText = document.getElementById('fmc').value;
+      document.getElementById('outStatus').innerText = document.getElementById('status').value;
       document.getElementById('outLocation').innerText = document.getElementById('location').value;
       document.getElementById('outCurrentLocation').innerText = document.getElementById('currentLocation').value;
-      document.getElementById('outTime').innerText = document.getElementById('time').value;
+      document.getElementById('outDelay').innerText = document.getElementById('delay').value;
       document.getElementById('outSource').innerText = document.getElementById('source').value;
+      document.getElementById('outTime').innerText = document.getElementById('time').value;
       document.getElementById('outDistance').innerText = document.getElementById('distance').value;
       document.getElementById('outEscalated').innerText = document.getElementById('escalated').value;
 
@@ -131,6 +156,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
