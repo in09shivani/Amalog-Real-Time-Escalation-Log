@@ -86,10 +86,10 @@
       margin-bottom: 20px;
     }
 
-    .output p {
-      margin: 6px 0;
+    #reportLine {
       font-size: 14px;
-      line-height: 1.4;
+      line-height: 1.5;
+      white-space: pre-line; /* Respect line breaks */
     }
   </style>
 </head>
@@ -132,41 +132,47 @@
 
   <div class="output" id="output" style="display:none;">
     <h2>Real-Time Escalation Report</h2>
-    <p><strong>Remarks:</strong> <span id="outRemarks"></span></p>
-    <p><strong>FMC GPS Flowing:</strong> <span id="outFmc"></span></p>
-    <p><strong>Current Status:</strong> <span id="outStatus"></span></p>
-    <p><strong>Location of Incident:</strong> <span id="outLocation"></span></p>
-    <p><strong>Current Location:</strong> <span id="outCurrentLocation"></span></p>
-    <p><strong>Delay Hours:</strong> <span id="outDelay"></span></p>
-    <p><strong>Source of Information:</strong> <span id="outSource"></span></p>
-    <p><strong>Time of Incident:</strong> <span id="outTime"></span></p>
-    <p><strong>Distance to Cover:</strong> <span id="outDistance"></span></p>
-    <p><strong>Escalated to Regional Team:</strong> <span id="outEscalated"></span></p>
+    <div id="reportLine"></div>
   </div>
 
   <script>
     const form = document.getElementById('amalogForm');
     const output = document.getElementById('output');
+    const reportLine = document.getElementById('reportLine');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      document.getElementById('outRemarks').innerText = document.getElementById('remarks').value;
-      document.getElementById('outFmc').innerText = document.getElementById('fmc').value;
-      document.getElementById('outStatus').innerText = document.getElementById('status').value;
-      document.getElementById('outLocation').innerText = document.getElementById('location').value;
-      document.getElementById('outCurrentLocation').innerText = document.getElementById('currentLocation').value;
-      document.getElementById('outDelay').innerText = document.getElementById('delay').value;
-      document.getElementById('outSource').innerText = document.getElementById('source').value;
-      document.getElementById('outTime').innerText = document.getElementById('time').value;
-      document.getElementById('outDistance').innerText = document.getElementById('distance').value;
-      document.getElementById('outEscalated').innerText = document.getElementById('escalated').value;
+      const remarks = document.getElementById('remarks').value.trim();
+      const fmc = document.getElementById('fmc').value.trim();
+      const status = document.getElementById('status').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const currentLocation = document.getElementById('currentLocation').value.trim();
+      const delay = document.getElementById('delay').value.trim();
+      const source = document.getElementById('source').value.trim();
+      const time = document.getElementById('time').value.trim();
+      const distance = document.getElementById('distance').value.trim();
+      const escalated = document.getElementById('escalated').value.trim();
 
+      const result = 
+`Remarks: ${remarks}
+FMC GPS Flowing: ${fmc}
+Current Status: ${status}
+Location of Incident: ${location}
+Current Location: ${currentLocation}
+Delay Hours: ${delay}
+Source of Information: ${source}
+Time of Incident: ${time}
+Distance to Cover: ${distance}
+Escalated to Regional Team: ${escalated}`;
+
+      reportLine.innerText = result;
       output.style.display = 'block';
     });
   </script>
 </body>
 </html>
+
 
 
 
